@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode: 'production',
     entry:{
-        home: path.resolve(__dirname, 'index.js')
+        "home": path.resolve(__dirname, 'src/entries/home.js')
     },
     devServer:{
         port: 9000,
