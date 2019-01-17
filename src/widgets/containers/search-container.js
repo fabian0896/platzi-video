@@ -17,9 +17,8 @@ class SearchContainer extends React.Component{
     }
 
     handelInputChange = (e)=>{
-        
         this.setState({
-            value: e.target.value.replace(" ", "-")
+            value: e.target.value.replace(" ", "")
         })
     }
 
