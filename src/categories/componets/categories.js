@@ -1,12 +1,16 @@
 import React from 'react';
 import Category from './category';
+import './categories.css';
+import Search from '../../widgets/components/search';
+import SearchContainer from '../../widgets/containers/search-container';
 
 function Categories(props){
     return(
-        <div>
+        <div className="Categories">
+        <SearchContainer />
             {
                 props.categories.map((item)=>{
-                    return <Category  key={item.id} {...item}/>
+                    return <Category handelOpenModal={ props.handelOpenModal }  key={item.id} {...item}/>
                 })
             }
         </div>
