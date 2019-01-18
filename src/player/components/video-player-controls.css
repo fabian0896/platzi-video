@@ -1,9 +1,10 @@
 .VideoPlayerControls{
     display: flex;
     position: absolute;
+    justify-content: space-between;
     background: rgba(0, 0, 0, .7);
-    bottom: 10px;
     top: 100px;
+    left: 10px;
     right: 10px;
     z-index: 2;
     border-radius: 20px;
