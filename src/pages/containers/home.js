@@ -4,6 +4,7 @@ import Categories from '../../categories/componets/categories';
 import Related from '../../pages/components/related';
 import ModalContainer from '../../widgets/containers/modal';
 import Modal from '../../widgets/components/modal';
+import VideoPlayer from '../../player/container/video-player';
 
 class Home extends React.Component{
     
@@ -28,6 +29,7 @@ class Home extends React.Component{
         return(
             <HomeLayout>
                 <Related />
+                <VideoPlayer autoplay />
                 <Categories handelOpenModal= { this.handelOpenModalClick } categories={ this.props.data.categories } />
                 {
                     this.state.modalVisible &&
