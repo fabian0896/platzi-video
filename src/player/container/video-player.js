@@ -9,6 +9,7 @@ import VideoPlayerControls from '../components/video-player-controls';
 import ProgressBar from '../components/progress-bar';
 import Spinner from '../components/spinner';
 import Volume from '../components/volume';
+import FullScreen from '../components/full-screen';
 
 class VideoPlayer extends React.Component{
     state = {
@@ -89,10 +90,23 @@ class VideoPlayer extends React.Component{
             this.video.volume = this.state.savedVolume;
         }
     }
+
+    setRef = element =>{
+        this.player = element;
+        console.log(this.player);
+    }
+
+    handelFullScreen = ()=>{
+        if(!document.webkitIsFullScreen){
+            this.player.webkitRequestFullScreen();
+        } else{
+            document.webkitExitFullscreen();
+        }
+    }
     
     render(){
         return(
-            <VideoPlayerLayout>
+            <VideoPlayerLayout setRef={ this.setRef }>
                 <Title title="Video Prueba" />
                 <VideoPlayerControls>
                     <PlayPause 
@@ -110,6 +124,7 @@ class VideoPlayer extends React.Component{
                        volume={ this.state.volume }
                        handelChangeVolume={ this.handelChangeVolume }
                     />
+                    <FullScreen handelFullScreen = { this.handelFullScreen } />
                 </VideoPlayerControls> 
                 {
                     this.state.loading &&

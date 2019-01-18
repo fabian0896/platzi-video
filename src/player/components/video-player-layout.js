@@ -3,7 +3,7 @@ import './video-player-layout.css';
 
 function VideoPlayerLayout(props){
     return(
-        <div className="VideoPlayerLayout">
+        <div ref={ props.setRef } className="VideoPlayerLayout">
             { props.children }
         </div>
     )
