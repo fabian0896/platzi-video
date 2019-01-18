@@ -6,12 +6,19 @@ import PlayPause from '../components/play-pause';
 import { runInThisContext } from 'vm';
 import Timer from '../components/timer';
 import VideoPlayerControls from '../components/video-player-controls';
+import ProgressBar from '../components/progress-bar';
+import Spinner from '../components/spinner';
+import Volume from '../components/volume';
 
 class VideoPlayer extends React.Component{
     state = {
         pause: true,
         duration: 0,
         currentTime: 0,
+        loading: false,
+        volume: 1,
+        savedVolume: 1,
+        mutePressed: false,
     }
 
     ToggleClick = ()=>{
@@ -38,6 +45,50 @@ class VideoPlayer extends React.Component{
             currentTime: this.video.currentTime
         })
     }
+
+    handelProgressBarChange = (e)=>{ 
+        this.video.currentTime = e.target.value;
+    }
+
+    handelSeeked = ()=>{
+        this.setState({
+            loading: false,
+            pause: false
+        })
+    }
+
+    handelSeeking = ()=>{
+        this.setState({
+            loading: true,
+            pause: true
+        })
+    }
+
+    handelChangeVolume = (e)=>{
+        this.setState({
+            volume: e.target.value
+        });
+        this.video.volume = this.state.volume;
+    }
+
+    handelMute = (e)=>{
+        if(e.target.name === 'range') return;
+        
+        if(!this.state.mutePressed){
+            this.setState({
+                mutePressed: true,
+                volume: 0,
+                savedVolume: this.video.volume
+            })
+            this.video.volume = 0;
+        } else{
+            this.setState({
+                mutePressed: false,
+                volume: this.state.savedVolume
+            })
+            this.video.volume = this.state.savedVolume;
+        }
+    }
     
     render(){
         return(
@@ -50,8 +101,23 @@ class VideoPlayer extends React.Component{
                     <Timer
                         currentTime = { this.state.currentTime }
                         duration={ this.state.duration }/>
+                    <ProgressBar
+                        handelProgressBarChange ={ this.handelProgressBarChange }
+                        currentTime={ this.state.currentTime } 
+                        duration={ this.state.duration }/>
+                    <Volume
+                       handelMute = { this.handelMute }  
+                       volume={ this.state.volume }
+                       handelChangeVolume={ this.handelChangeVolume }
+                    />
                 </VideoPlayerControls> 
+                {
+                    this.state.loading &&
+                    <Spinner />
+                }
                 <Video
+                    handelSeeked = { this.handelSeeked }
+                    handelSeeking = { this.handelSeeking }
                     handelTimeUpdate = { this.handelTimeUpdate }
                     handelLoadedMetadata={ this.handelLoadedMetadata }
                     pause={ this.state.pause }

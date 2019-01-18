@@ -21,7 +21,10 @@ class Video extends React.Component{
     }
 
     render(){
-        const { handelLoadedMetadata, handelTimeUpdate } = this.props;
+        const { handelLoadedMetadata, 
+                handelTimeUpdate,
+                handelSeeked,
+                handelSeeking } = this.props;
         return(
             <video className="Video"
                 autoPlay={ this.props.autoplay }   
@@ -29,6 +32,8 @@ class Video extends React.Component{
                 ref = { this.setRef }
                 onLoadedMetadata={ handelLoadedMetadata }
                 onTimeUpdate={ handelTimeUpdate }
+                onSeeking = { handelSeeking }
+                onSeeked ={ handelSeeked }
             />
         )
     }
