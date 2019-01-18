@@ -21,11 +21,14 @@ class Video extends React.Component{
     }
 
     render(){
+        const { handelLoadedMetadata, handelTimeUpdate } = this.props;
         return(
             <video className="Video"
                 autoPlay={ this.props.autoplay }   
                 src={ this.props.src }
                 ref = { this.setRef }
+                onLoadedMetadata={ handelLoadedMetadata }
+                onTimeUpdate={ handelTimeUpdate }
             />
         )
     }
