@@ -1,10 +1,11 @@
-.hidder{
-    overflow: hidden;
-}
 
 .playlist{
     overflow-x: auto;
     white-space: nowrap;
     overflow-y: hidden;
     margin-bottom: -18px;
+}
+
+.playlist::-webkit-scrollbar { 
+    display: none; 
 }
