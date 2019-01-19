@@ -1,6 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 
 
 module.exports = {
@@ -8,19 +9,20 @@ module.exports = {
     entry:{
         "home": path.resolve(__dirname, 'src/entries/home.js')
     },
-    devServer:{
-        port: 9000,
-        hot: true
-    },
     output:{
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].js'
+        filename: 'js/[name].js',
+        publicPath: path.resolve(__dirname, 'dist')+"/"
     },
+    devtool: 'nosources-source-map',
     module:{
         rules:[
             {
                 test: /\.css$/,
-                use: [ 'css-loader', MiniCssExtractPlugin.loader]
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader', 
+                ]
             },
             {
                 test: /\.(js|jsx)$/,
@@ -39,7 +41,8 @@ module.exports = {
                     loader: 'url-loader',
                     options: {
                         limit: 10000,
-                        fallback: 'file-loader'          
+                        fallback: 'file-loader',
+                        name: 'images/[name].[hash].[ext]'          
                     }
                 }
             }
@@ -49,6 +52,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
             chunkFilename: '[id].css'
-        })
+        }),
+        new HtmlWebpackPlugin()
     ]
 }
