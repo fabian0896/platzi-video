@@ -3,4 +3,21 @@ import { render } from 'react-dom';
 import Home from '../pages/containers/home';
 import data from '../api.json';
 
-render(<Home data={ data } />, document.getElementById('app'));
+import  { createStore } from 'redux'
+import  { Provider } from 'react-redux';
+
+const initialState = {
+    data: {
+        ...data
+    }
+}
+
+const store = createStore((state)=>state, initialState)
+
+
+
+render(
+<Provider store={ store }>
+    <Home/>
+</Provider>,
+document.getElementById('app'));
