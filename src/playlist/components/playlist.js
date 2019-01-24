@@ -10,7 +10,7 @@ class Playlist extends React.Component{
             <div className="playlist">
                 {
                     this.props.playlist.map((video)=>{
-                        return <Media handelClick={this.props.handelOpenModal} {...video}  key={video.id} />
+                        return <Media openModal={this.props.handelOpenModal} {...video}  key={video.id} />
                     }) 
                 }
             </div>

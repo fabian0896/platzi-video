@@ -13,11 +13,13 @@ class Home extends React.Component{
         modalVisible: false
     }
 
-    handelOpenModalClick = ()=>{
+    handelOpenModalClick = (media)=>{
         console.log("hola");
         this.setState({
-            modalVisible: true
-        })
+            modalVisible: true,
+            media,
+        });
+
     }
 
     handelCloseModalClick = ()=>{
@@ -36,7 +38,7 @@ class Home extends React.Component{
                     this.state.modalVisible &&
                     <ModalContainer>
                         <Modal handelClick={ this.handelCloseModalClick } >
-                            <h1>Esto es un Modal!</h1>
+                            <VideoPlayer src={ this.state.media.src } title={ this.state.media.title }  autoplay />
                         </Modal>
                     </ModalContainer>
                 }

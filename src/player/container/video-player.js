@@ -93,7 +93,6 @@ class VideoPlayer extends React.Component{
 
     setRef = element =>{
         this.player = element;
-        console.log(this.player);
     }
 
     handelFullScreen = ()=>{
@@ -107,7 +106,7 @@ class VideoPlayer extends React.Component{
     render(){
         return(
             <VideoPlayerLayout setRef={ this.setRef }>
-                <Title title="Video Prueba" />
+                <Title title={ this.props.title } />
                 <VideoPlayerControls>
                     <PlayPause 
                         pause={ this.state.pause } 
@@ -137,7 +136,8 @@ class VideoPlayer extends React.Component{
                     handelLoadedMetadata={ this.handelLoadedMetadata }
                     pause={ this.state.pause }
                     autoplay={ this.props.autoplay } 
-                    src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" />
+                    src={ this.props.src }
+                    title={ this.props.title } />
             </VideoPlayerLayout>
         )
     }
