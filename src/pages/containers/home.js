@@ -32,7 +32,7 @@ class Home extends React.Component{
         return(
             <HomeLayout>
                 <Related />
-                <Categories handelOpenModal= { this.handelOpenModalClick } categories={ this.props.categories } />
+                <Categories search={this.props.search} handelOpenModal= { this.handelOpenModalClick } categories={ this.props.categories } />
                 {
                     this.state.modalVisible &&
                     <ModalContainer>
@@ -48,7 +48,8 @@ class Home extends React.Component{
 
 function mapStateToProps(state, props){
     return {
-        categories: state.data.categories
+        categories: state.data.categories,
+        search: state.search
     }
 }
 

@@ -7,7 +7,8 @@ import { Provider } from 'react-redux';
 import reducer from '../reducers/data.js'
 
 const initialState = {
-    data: {...data}
+    data: {...data},
+    search: []
 }
 
 const store = createStore(reducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
