@@ -12,7 +12,7 @@ const initialState = {
     }
 }
 
-const store = createStore((state)=>state, initialState)
+const store = createStore((state)=>state, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
 
