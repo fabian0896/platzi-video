@@ -1,5 +1,6 @@
 import React from 'react';
 import Search from '../components/search';
+import { connect } from 'react-redux'
 
 class SearchContainer extends React.Component{
     
@@ -9,7 +10,13 @@ class SearchContainer extends React.Component{
 
     handelSubmit = (e) => {
         e.preventDefault();
-        console.log(this.element.value)
+        console.log(this.element.value);
+        this.props.dispatch({
+            type: 'SEARCH_VIDEO',
+            payload: {
+                query: this.element.value
+            }
+        })
     }
 
     getRef = (element) =>{
@@ -34,4 +41,4 @@ class SearchContainer extends React.Component{
 }
 
 
-export default SearchContainer;
+export default connect()(SearchContainer);
