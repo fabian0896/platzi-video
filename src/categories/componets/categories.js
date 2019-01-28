@@ -11,12 +11,12 @@ function Categories(props){
             <SearchContainer />
             {
                 props.search.map((item) =>{
-                    return <Media key={item.id} {...item} />
+                    return <Media key={item.get('id')} {...item.toJS()} />
                 })
             }
             {
                 props.categories.map((item)=>{
-                    return <Category handelOpenModal={ props.handelOpenModal }  key={item.id} {...item}/>
+                    return <Category handelOpenModal={ props.handelOpenModal }  key={item.get('id')} {...item.toJS()}/>
                 })
             }
         </div>

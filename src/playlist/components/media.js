@@ -1,5 +1,6 @@
 import React from 'react';
 import './media.css';
+import { connect } from 'react-redux'
 
 class Media extends React.Component{
     
@@ -9,9 +10,21 @@ class Media extends React.Component{
         image: this.props.cover
     }
 
-    handelClick = ()=>{
-        this.props.openModal(this.props);
+    // handelClick = ()=>{
+    //     this.props.openModal(this.props);
+    // }
+
+    handelClick = () =>{
+        console.log('open')
+        this.props.dispatch({
+            type: 'OPEN_MODAL',
+            payload: {
+                visibility: true,
+                mediaId: this.props.id
+            }
+        });
     }
+
     
     render(){
         return(
@@ -27,4 +40,4 @@ class Media extends React.Component{
 }
 
 
-export default Media;
+export default connect()(Media);

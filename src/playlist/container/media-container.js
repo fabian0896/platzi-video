@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 
 class MediaContainer extends React.Component{
     render(){
-        return <Media openModal={ this.props.openModal } {...this.props.data} />
+        return <Media openModal={ this.props.openModal } {...this.props.data.toJS()} />
     }
 }
 
 
 function mapStateToProps(state, props){
     return {
-        data: state.data.entitis.media[props.id]
+        data: state.get('data').get('entitis').get('media').get(props.id)
     }
 }
 

@@ -5,7 +5,9 @@ import Related from '../../pages/components/related';
 import ModalContainer from '../../widgets/containers/modal';
 import Modal from '../../widgets/components/modal';
 import VideoPlayer from '../../player/container/video-player';
-import {  connect } from 'react-redux'
+import {  connect } from 'react-redux';
+import { List as list } from 'immutable'
+
 
 class Home extends React.Component{
     
@@ -23,8 +25,11 @@ class Home extends React.Component{
     }
 
     handelCloseModalClick = ()=>{
-        this.setState({
-            modalVisible: false
+        this.props.dispatch({
+            type: 'CLOSE_MODAL',
+            payload: {
+                visibility: false
+            }
         })
     }
     
@@ -34,10 +39,10 @@ class Home extends React.Component{
                 <Related />
                 <Categories search={this.props.search} handelOpenModal= { this.handelOpenModalClick } categories={ this.props.categories } />
                 {
-                    this.state.modalVisible &&
+                    this.props.modalVisible &&
                     <ModalContainer>
                         <Modal handelClick={ this.handelCloseModalClick } >
-                            <VideoPlayer src={ this.state.media.src } title={ this.state.media.title }  autoplay />
+                            <VideoPlayer mediaId={this.props.modalId}  autoplay />
                         </Modal>
                     </ModalContainer>
                 }
@@ -47,12 +52,22 @@ class Home extends React.Component{
 }
 
 function mapStateToProps(state, props){
-    const categories = state.data.categories.map(categoryId=>{
-        return state.data.entitis.categories[categoryId];
-    })
+    const categories = state.get('data').get('categories').map(categoryId=>{
+        return state.get('data').get('entitis').get('categories').get(categoryId);
+    });
+    let searchResults = list();
+    const search = state.get('data').get('search')
+    if(search){
+        const mediaList = state.get('data').get('entitis').get('media');
+        searchResults = mediaList.filter((item)=>{
+            return item.get('author').toLowerCase().includes(search.toLowerCase());
+        }).toList();
+    }
     return {
         categories: categories,
-        search: state.search
+        search: searchResults,
+        modalVisible: state.get('modal').get('visibility'),
+        modalId: state.get('modal').get('mediaId')
     }
 }
 

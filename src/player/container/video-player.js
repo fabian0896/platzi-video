@@ -10,6 +10,9 @@ import ProgressBar from '../components/progress-bar';
 import Spinner from '../components/spinner';
 import Volume from '../components/volume';
 import FullScreen from '../components/full-screen';
+import { connect } from 'react-redux';
+import media from '../../playlist/components/media';
+
 
 class VideoPlayer extends React.Component{
     state = {
@@ -143,5 +146,12 @@ class VideoPlayer extends React.Component{
     }
 }
 
+function mapStateToProps(state, props){
+    const video = state.get('data').get('entitis').get('media').get(props.mediaId)
+    return{
+        title: video.get('title'),
+        src: video.get('src')
+    }
+}
 
-export default VideoPlayer;
+export default connect(mapStateToProps)(VideoPlayer);

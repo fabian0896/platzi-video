@@ -1,7 +1,20 @@
-function data(state, action){
+import dataApi from '../schemas/index';
+import { fromJS } from 'immutable'
+
+
+
+const initialState = fromJS({
+    entitis: dataApi.entities,
+    categories: dataApi.result.categories,
+    search: ''
+})
+
+
+
+function data(state = initialState, action){
     switch(action.type){
         case 'SEARCH_VIDEO':{
-            let results = [];
+            /* let results = [];
             const list = state.data.categories[2].playlist;
             if (action.payload.query){
                 results = list.filter((item)=>{
@@ -11,7 +24,8 @@ function data(state, action){
             return {
                 ...state,
                 search: results
-            };
+            }; */
+            return state.set('search', action.payload.query)
         }
 
         default:
