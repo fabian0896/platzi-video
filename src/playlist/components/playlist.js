@@ -2,7 +2,7 @@ import React from 'react';
 // import Media from './media';
 import './playlist.css';
 import Media from '../container/media-container';
-
+import { Link } from 'react-router-dom';
 
 
 class Playlist extends React.Component{

@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
     mode: 'development',
     entry:{
-        "home": path.resolve(__dirname, 'src/entries/home.js')
+        "app": path.resolve(__dirname, 'src/entries/app.js')
     },
     devServer:{
         port: 9000,
