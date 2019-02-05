@@ -7,7 +7,7 @@ import reducer from '../reducers/index.js'
 // import data from '../schemas/index';
 import { Map as map } from 'immutable';
 
-import  { BrowserRouter, Route } from 'react-router-dom'
+import  { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import Header from '../pages/components/header';
 
@@ -35,10 +35,13 @@ render(
     <Provider store={store}>
         <Fragment>
             <Header/>
-            <Route exact path="/" component={ Home } />
-            <Route exact path="/videos" component={ Videos } />
-            <Route exact path="/contacto" component={ Contact } />
-            <Route component={ NotFound } />
+            <Switch>
+                <Route exact path="/" component={ Home } />
+                <Route exact path="/videos" component={ Videos } />
+                <Redirect from="/v" to="/videos" />
+                <Route exact path="/contacto" component={ Contact } />
+                <Route component={ NotFound } />
+            </Switch>
         </Fragment>
     </Provider>
 </BrowserRouter>
