@@ -1,20 +1,21 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry:{
-        "app": path.resolve(__dirname, 'src/entries/app.js')
+        "app": path.resolve(__dirname, 'src/pages/containers/app.js')
     },
     output:{
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].js',
-        publicPath: "/"
+        filename: 'ssr/[name].js',
+        publicPath: "/",
+        libraryTarget: 'commonjs2'
     },
     devtool: 'nosources-source-map',
+    target: 'node',
     module:{
         rules:[
             {
@@ -53,6 +54,5 @@ module.exports = {
             filename: 'css/[name].css',
             chunkFilename: '[id].css'
         }),
-        new HtmlWebpackPlugin()
     ]
 }
