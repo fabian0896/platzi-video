@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 class SearchContainer extends React.Component{
     
     state = {
-        value: 'Luis Fonsi'
+        value: ''
     }
 
     handelSubmit = (e) => {

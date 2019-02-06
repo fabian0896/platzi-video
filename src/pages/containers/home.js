@@ -25,12 +25,23 @@ class Home extends React.Component{
     }
 
     handelCloseModalClick = ()=>{
+        this.setState({
+            modalVisible: false,
+        });
         this.props.dispatch({
             type: 'CLOSE_MODAL',
             payload: {
                 visibility: false
             }
         })
+    }
+
+    componentWillMount(){
+        const search = this.props.location.search;
+        if(search){
+            const id = search.split('=')[1];
+            this.handelOpenModalClick(id);
+        }
     }
     
     render(){
@@ -39,10 +50,10 @@ class Home extends React.Component{
                 <Related />
                 <Categories search={this.props.search} handelOpenModal= { this.handelOpenModalClick } categories={ this.props.categories } />
                 {
-                    this.props.modalVisible &&
+                    this.state.modalVisible &&
                     <ModalContainer>
                         <Modal handelClick={ this.handelCloseModalClick } >
-                            <VideoPlayer mediaId={this.props.modalId}  autoplay />
+                            <VideoPlayer mediaId={this.state.media}  autoplay />
                         </Modal>
                     </ModalContainer>
                 }

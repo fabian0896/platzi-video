@@ -17,7 +17,8 @@ class Media extends React.Component{
     // }
 
     handelClick = () =>{
-        console.log('open')
+        console.log('open');
+        this.props.openModal(this.props.id);
         this.props.dispatch({
             type: 'OPEN_MODAL',
             payload: {
